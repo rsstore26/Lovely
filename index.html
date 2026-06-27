@@ -129,7 +129,6 @@
             padding: 20px 0;
         }
 
-        /* الخط العمودي اللي بالنص */
         .timeline::after {
             content: '';
             position: absolute;
@@ -141,7 +140,6 @@
             margin-left: -2px;
         }
 
-        /* حاويات الكروت */
         .timeline-container {
             padding: 10px 40px;
             position: relative;
@@ -150,7 +148,6 @@
             box-sizing: border-box;
         }
 
-        /* نقطة الالتقاء على الخط بالنص */
         .timeline-container::after {
             content: '';
             position: absolute;
@@ -164,25 +161,12 @@
             z-index: 1;
         }
 
-        /* كرت على اليسار */
-        .left {
-            left: 0;
-        }
+        .left { left: 0; }
+        .right { left: 50%; }
 
-        /* كرت على اليمين */
-        .right {
-            left: 50%;
-        }
+        .left::after { left: -8px; }
+        .right::after { right: -8px; }
 
-        /* تعديل النقطة للكرت اليمين واليسار */
-        .left::after {
-            left: -8px;
-        }
-        .right::after {
-            right: -8px;
-        }
-
-        /* الكرت نفسه (المحتوى) */
         .content {
             padding: 20px;
             background-color: white;
@@ -197,7 +181,6 @@
             box-shadow: 0 10px 25px rgba(212, 129, 122, 0.15);
         }
 
-        /* التاريخ داخل الكرت */
         .date {
             font-weight: bold;
             color: #d4817a;
@@ -219,7 +202,6 @@
             font-size: 0.95rem;
         }
 
-        /* تنسيق الصور داخل الكروت */
         .timeline-img {
             width: 100%;
             max-height: 250px;
@@ -229,7 +211,33 @@
             display: block;
         }
 
-        /* ---Responsive لتعديل التصميم على الموبايل عشان يطلع متناسق جداً --- */
+        /* --- زر التحكم بالموسيقى في زاوية الشاشة --- */
+        .music-control {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background-color: #d4817a;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 129, 122, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background-color: #c36f68;
+        }
+
+        /* --- Responsive لتعديل التصميم على الموبايل --- */
         @media screen and (max-width: 600px) {
             .timeline::after {
                 left: 31px;
@@ -245,10 +253,26 @@
             .right {
                 left: 0%;
             }
+            .music-control {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ملف الصوت (مخفي بالخلفية) -->
+    <audio id="bg-music" loop>
+        <source src="our-song.mp3" type="audio/mpeg">
+        متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+
+    <!-- زر التحكم بالموسيقى (يظهر بعد فتح القفل) -->
+    <button id="music-btn" class="music-control" style="display: none;" onclick="toggleMusic()">🎵</button>
 
     <div id="lock-screen">
         <div class="lock-container">
@@ -300,6 +324,9 @@
     </div>
 
     <script>
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+
         function checkPassword() {
             const passwordInput = document.getElementById('password-field').value.trim();
             const errorMsg = document.getElementById('error-msg');
@@ -313,14 +340,33 @@
                 lockScreen.style.opacity = '0';
                 lockScreen.style.visibility = 'hidden';
                 
-                // إظهار المحتوى الداخلي
+                // إظهار المحتوى الداخلي وزر الموسيقى
                 mainContent.style.display = 'block';
+                musicBtn.style.display = 'flex';
+                
+                // تشغيل الأغنية تلقائياً بمجرد فتح القفل (تجاوزاً لقيود المتصفح)
+                bgMusic.play().catch(error => {
+                    console.log("التشغيل التلقائي بحاجة لتفاعل أولاً.");
+                });
+
                 setTimeout(() => {
                     mainContent.style.opacity = '1';
                 }, 50);
             } else {
                 errorMsg.style.display = 'block';
                 document.getElementById('password-field').value = '';
+            }
+        }
+
+        // وظيفة تشغيل وإيقاف الموسيقى من الزر
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.innerText = "🎵";
+                musicBtn.style.animation = "none";
+            } else {
+                bgMusic.pause();
+                musicBtn.innerText = "🔇";
             }
         }
 
