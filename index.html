@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -265,13 +266,11 @@
 </head>
 <body>
 
-    <!-- ملف الصوت (مخفي بالخلفية) -->
     <audio id="bg-music" loop>
         <source src="our-song.mp3" type="audio/mpeg">
         متصفحك لا يدعم تشغيل الصوت.
     </audio>
 
-    <!-- زر التحكم بالموسيقى (يظهر بعد فتح القفل) -->
     <button id="music-btn" class="music-control" style="display: none;" onclick="toggleMusic()">🎵</button>
 
     <div id="lock-screen">
@@ -319,6 +318,60 @@
                     <p>من احلى الايام اللي بتمرق علينا، اترجلت و حكيت كلام غزل لأول مرة وجه لوجه كسرت حاجز الخوف، و احلى اشي كان فيه ضحكتك لما كتبت اسمك عاللوحة، بحب ضحكتك كتيير 🫶</p>
                 </div>
             </div>
+
+            <div class="timeline-container left">
+                <div class="content">
+                    <span class="date">22/4/2026 </span>
+                    <img src="rs3.JPG" alt="ذكرى جديدة" class="timeline-img" onerror="this.style.display='none'">
+                    <h2> صورتك محفورة بالعقل 🥹 </h2>
+                    <p> صورتك اياها و انتي بتطلي و بتحكي و طلبتي نعمل لايك مع بعض عشان كل واحد منا يصور التاني 😍.</p>
+                </div>
+            </div>
+
+            <div class="timeline-container right">
+                <div class="content">
+                    <span class="date"> 13/3/2026</span>
+                    <img src="rs4.JPG" alt="ذكرى جديدة" class="timeline-img" onerror="this.style.display='none'">
+                    <h2>  صور عيد ميلادك 🎊</h2>
+                    <p>طلبت منك اكتر صور بتحبيها و حلوة عندك عشان اعملك هديتك بعيد ميلادك، عنجد احلى و ارقى صور و كل صورك حلوة و بتجنن 🩵</p>
+                </div>
+            </div>
+
+            <div class="timeline-container left">
+                <div class="content">
+                    <span class="date">13/3/2026 </span>
+                    <img src="rs5.JPG" alt="ذكرى جديدة" class="timeline-img" onerror="this.style.display='none'">
+                    <h2>صور عيد ميلادك 🎊</h2>
+                    <p>اكتب هنا الكلام طلبت منك اكتر صور بتحبيها و حلوة عندك عشان اعملك هديتك بعيد ميلادك، عنجد احلى و ارقى صور و كل صورك حلوة و بتجنن 🩵</p>
+                </div>
+            </div>
+
+            <div class="timeline-container right">
+                <div class="content">
+                    <span class="date">13/3/2026</span>
+                    <img src="rs6.JPG" alt="ذكرى جديدة" class="timeline-img" onerror="this.style.display='none'">
+                    <h2>صور عيد ميلادك 🎊</h2>
+                    <p>طلبت منك اكتر صور بتحبيها و حلوة عندك عشان اعملك هديتك بعيد ميلادك، عنجد احلى و ارقى صور و كل صورك حلوة و بتجنن 🩵.</p>
+                </div>
+            </div>
+
+            <div class="timeline-container left">
+                <div class="content">
+                    <span class="date"> 19/4/2026</span>
+                    <img src="rs7.JPG" alt="ذكرى جديدة" class="timeline-img" onerror="this.style.display='none'">
+                    <h2>صورة المصعد 🚡</h2>
+                    <p>كان النا اسبوع ما بنحكي و كتييير اشتقتلك و طلبت اشوفك بعتيلي هاي يا الله شو بحبها ❤️.</p>
+                </div>
+            </div>
+
+            <div class="timeline-container right">
+                <div class="content">
+                    <span class="date">26/6/2026 </span>
+                    <img src="rs8.JPG" alt="ذكرى جديدة" class="timeline-img" onerror="this.style.display='none'">
+                    <h2>اول صورة الك و انتي بالاردن 🥹</h2>
+                    <p>عجزت الحروف عن التعبير، و عجز اللسان عن الكلام، و عجز العقل عن التفكير، اجمل و احلى و ارق حدا بلعب باياردو يا عيوني 🎱.</p>
+                </div>
+            </div>
             
         </div>
     </div>
@@ -344,7 +397,7 @@
                 mainContent.style.display = 'block';
                 musicBtn.style.display = 'flex';
                 
-                // تشغيل الأغنية تلقائياً بمجرد فتح القفل (تجاوزاً لقيود المتصفح)
+                // تشغيل الأغنية تلقائياً بمجرد فتح القفل
                 bgMusic.play().catch(error => {
                     console.log("التشغيل التلقائي بحاجة لتفاعل أولاً.");
                 });
@@ -363,7 +416,6 @@
             if (bgMusic.paused) {
                 bgMusic.play();
                 musicBtn.innerText = "🎵";
-                musicBtn.style.animation = "none";
             } else {
                 bgMusic.pause();
                 musicBtn.innerText = "🔇";
@@ -378,4 +430,3 @@
     </script>
 
 </body>
-</html>
